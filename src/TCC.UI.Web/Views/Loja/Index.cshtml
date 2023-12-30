@@ -1,0 +1,86 @@
+@using Microsoft.AspNetCore.Identity;
+@using TCC.Domain.Models;
+@model IEnumerable<TCC.Application.ViewModels.ItemLojaViewModel>
+
+@inject UserManager<Usuario> UserManager
+
+@{
+	ViewData["Title"] = "LogPlay - Loja";
+}
+
+<div class="loja-main-container">
+    <header>
+        <h1>Loja de Itens</h1>
+        <div class="moedas">
+            Suas Moedas:
+            <span id="moedas-usuario">@UserManager.GetUserAsync(User).Result.QtdMoedas</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 card">
+                    <img src="~/assets/img/Loja/@item.ImagemUrl" alt="Item 1">
+                    <h2>@item.Nome</h2>
+                    <p>@item.Descricao</p>
+                    <p>@item.Preco</p>
+                    <button class="btnComprar" onclick="Comprar('@item.Id.ToString()')">Comprar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+        function Comprar(id) {
+            Swal.fire({
+                title: 'Deseja confirmar a compra?',
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Comprar',
+                confirmButtonColor: '#201b2c',
+                showLoaderOnConfirm: true,
+                preConfirm: () => {
+                    //const baseURL = "https://localhost:7072"
+                    const baseURL = "https://logplay.net"
+                    console.log(this);
+                    $.get(`${baseURL}/Loja/Comprar/${id}`)
+                        .then(function (response) {
+                            if (!response.ok) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: `${response.title}`,
+                                    text: `${response.errorMessage}`
+                                })
+                            }
+                            else {
+
+                                $("#moedas-usuario").text(`${response.result}`)
+
+                                Swal.fire({
+                                    position: 'center',
+                                    icon: 'success',
+                                    title: 'Compra efetuada!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+
+                            }
+                            return response
+                        })
+                },
+                allowOutsideClick: false
+            })
+        }
+    </script>
+
+    }
+
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Loja/loja.css">
+}

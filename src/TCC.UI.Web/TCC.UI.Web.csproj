@@ -1,0 +1,233 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>9136dfba-ed6f-4762-926e-e931355eaa0f</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NovaPasta1\**" />
+    <Content Remove="NovaPasta1\**" />
+    <EmbeddedResource Remove="NovaPasta1\**" />
+    <None Remove="NovaPasta1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\assets\img\Home\moeda.gif" />
+    <Content Remove="wwwroot\assets\img\Home\xp.gif" />
+    <Content Remove="wwwroot\assets\pdf\Variaveis\Variaveis.pdf" />
+    <Content Remove="wwwroot\assets\video\animation_lmma1dwj.mp4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="node_modules\%40sweetalert2\themes\bootstrap-4\bootstrap-4.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\bootstrap-4\bootstrap-4.min.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\bootstrap-4\package.json" />
+    <Content Include="node_modules\%40sweetalert2\themes\borderless\borderless.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\borderless\borderless.min.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\borderless\package.json" />
+    <Content Include="node_modules\%40sweetalert2\themes\bulma\bulma.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\bulma\bulma.min.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\bulma\package.json" />
+    <Content Include="node_modules\%40sweetalert2\themes\dark\dark.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\dark\dark.min.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\dark\package.json" />
+    <Content Include="node_modules\%40sweetalert2\themes\default\default.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\default\default.min.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\default\package.json" />
+    <Content Include="node_modules\%40sweetalert2\themes\material-ui\material-ui.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\material-ui\material-ui.min.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\material-ui\package.json" />
+    <Content Include="node_modules\%40sweetalert2\themes\minimal\minimal.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\minimal\minimal.min.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\minimal\package.json" />
+    <Content Include="node_modules\%40sweetalert2\themes\package.json" />
+    <Content Include="node_modules\%40sweetalert2\themes\wordpress-admin\package.json" />
+    <Content Include="node_modules\%40sweetalert2\themes\wordpress-admin\wordpress-admin.css" />
+    <Content Include="node_modules\%40sweetalert2\themes\wordpress-admin\wordpress-admin.min.css" />
+    <Content Include="node_modules\.package-lock.json" />
+    <Content Include="node_modules\is-dom-node-list\package.json" />
+    <Content Include="node_modules\is-dom-node\package.json" />
+    <Content Include="node_modules\miniraf\package.json" />
+    <Content Include="node_modules\rematrix\package.json" />
+    <Content Include="node_modules\scrollreveal\package.json" />
+    <Content Include="node_modules\sweetalert2\dist\sweetalert2.css" />
+    <Content Include="node_modules\sweetalert2\dist\sweetalert2.min.css" />
+    <Content Include="node_modules\sweetalert2\package.json" />
+    <Content Include="node_modules\tealight\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.23" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.23" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.23" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.23" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.23">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
+    <PackageReference Include="PDFiumCore" Version="119.0.6043" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TCC.Application\TCC.Application.csproj" />
+    <ProjectReference Include="..\TCC.Infra.CrossCutting.IoC\TCC.Infra.CrossCutting.IoC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Data\" />
+    <Folder Include="wwwroot\assets\pdf\Matrizes\" />
+    <Folder Include="wwwroot\assets\pdf\EstruturaDeDados\" />
+    <Folder Include="wwwroot\assets\pdf\LacosDeRepeticao\" />
+    <Folder Include="wwwroot\assets\pdf\Vetores\" />
+    <Folder Include="wwwroot\assets\pdf\TiposDeDados\" />
+    <Folder Include="wwwroot\assets\video\" />
+    <Folder Include="wwwroot\js\Login\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="node_modules\%40sweetalert2\themes\bootstrap-4\bootstrap-4.scss" />
+    <None Include="node_modules\%40sweetalert2\themes\bootstrap-4\README.md" />
+    <None Include="node_modules\%40sweetalert2\themes\borderless\borderless.scss" />
+    <None Include="node_modules\%40sweetalert2\themes\borderless\README.md" />
+    <None Include="node_modules\%40sweetalert2\themes\bulma\bulma.scss" />
+    <None Include="node_modules\%40sweetalert2\themes\bulma\README.md" />
+    <None Include="node_modules\%40sweetalert2\themes\CHANGELOG.md" />
+    <None Include="node_modules\%40sweetalert2\themes\dark\dark.scss" />
+    <None Include="node_modules\%40sweetalert2\themes\dark\README.md" />
+    <None Include="node_modules\%40sweetalert2\themes\default\default.scss" />
+    <None Include="node_modules\%40sweetalert2\themes\default\README.md" />
+    <None Include="node_modules\%40sweetalert2\themes\LICENSE" />
+    <None Include="node_modules\%40sweetalert2\themes\material-ui\material-ui.scss" />
+    <None Include="node_modules\%40sweetalert2\themes\material-ui\README.md" />
+    <None Include="node_modules\%40sweetalert2\themes\minimal\minimal.scss" />
+    <None Include="node_modules\%40sweetalert2\themes\minimal\README.md" />
+    <None Include="node_modules\%40sweetalert2\themes\README.md" />
+    <None Include="node_modules\%40sweetalert2\themes\vite.config.js" />
+    <None Include="node_modules\%40sweetalert2\themes\wordpress-admin\animations.scss" />
+    <None Include="node_modules\%40sweetalert2\themes\wordpress-admin\README.md" />
+    <None Include="node_modules\%40sweetalert2\themes\wordpress-admin\wordpress-admin.scss" />
+    <None Include="node_modules\is-dom-node-list\CHANGELOG.md" />
+    <None Include="node_modules\is-dom-node-list\dist\is-dom-node-list.es.js" />
+    <None Include="node_modules\is-dom-node-list\dist\is-dom-node-list.js" />
+    <None Include="node_modules\is-dom-node-list\dist\is-dom-node-list.min.js" />
+    <None Include="node_modules\is-dom-node-list\LICENSE" />
+    <None Include="node_modules\is-dom-node-list\README.md" />
+    <None Include="node_modules\is-dom-node\CHANGELOG.md" />
+    <None Include="node_modules\is-dom-node\dist\is-dom-node.es.js" />
+    <None Include="node_modules\is-dom-node\dist\is-dom-node.js" />
+    <None Include="node_modules\is-dom-node\dist\is-dom-node.min.js" />
+    <None Include="node_modules\is-dom-node\LICENSE" />
+    <None Include="node_modules\is-dom-node\README.md" />
+    <None Include="node_modules\miniraf\CHANGELOG.md" />
+    <None Include="node_modules\miniraf\dist\miniraf.es.js" />
+    <None Include="node_modules\miniraf\dist\miniraf.js" />
+    <None Include="node_modules\miniraf\dist\miniraf.min.js" />
+    <None Include="node_modules\miniraf\LICENSE" />
+    <None Include="node_modules\miniraf\README.md" />
+    <None Include="node_modules\rematrix\CHANGELOG.md" />
+    <None Include="node_modules\rematrix\dist\rematrix.es.js" />
+    <None Include="node_modules\rematrix\dist\rematrix.js" />
+    <None Include="node_modules\rematrix\dist\rematrix.min.js" />
+    <None Include="node_modules\rematrix\LICENSE" />
+    <None Include="node_modules\rematrix\README.md" />
+    <None Include="node_modules\scrollreveal\CHANGELOG.md" />
+    <None Include="node_modules\scrollreveal\dist\scrollreveal.es.js" />
+    <None Include="node_modules\scrollreveal\dist\scrollreveal.js" />
+    <None Include="node_modules\scrollreveal\dist\scrollreveal.min.js" />
+    <None Include="node_modules\scrollreveal\README.md" />
+    <None Include="node_modules\sweetalert2\dist\sweetalert2.all.js" />
+    <None Include="node_modules\sweetalert2\dist\sweetalert2.all.min.js" />
+    <None Include="node_modules\sweetalert2\dist\sweetalert2.js" />
+    <None Include="node_modules\sweetalert2\dist\sweetalert2.min.js" />
+    <None Include="node_modules\sweetalert2\LICENSE" />
+    <None Include="node_modules\sweetalert2\README.md" />
+    <None Include="node_modules\sweetalert2\src\buttons-handlers.js" />
+    <None Include="node_modules\sweetalert2\src\constants.js" />
+    <None Include="node_modules\sweetalert2\src\globalState.js" />
+    <None Include="node_modules\sweetalert2\src\instanceMethods.js" />
+    <None Include="node_modules\sweetalert2\src\instanceMethods\close.js" />
+    <None Include="node_modules\sweetalert2\src\instanceMethods\enable-disable-elements.js" />
+    <None Include="node_modules\sweetalert2\src\instanceMethods\getInput.js" />
+    <None Include="node_modules\sweetalert2\src\instanceMethods\hideLoading.js" />
+    <None Include="node_modules\sweetalert2\src\instanceMethods\update.js" />
+    <None Include="node_modules\sweetalert2\src\instanceMethods\validation-message.js" />
+    <None Include="node_modules\sweetalert2\src\instanceMethods\_destroy.js" />
+    <None Include="node_modules\sweetalert2\src\keydown-handler.js" />
+    <None Include="node_modules\sweetalert2\src\popup-click-handler.js" />
+    <None Include="node_modules\sweetalert2\src\privateMethods.js" />
+    <None Include="node_modules\sweetalert2\src\privateProps.js" />
+    <None Include="node_modules\sweetalert2\src\scss\_animations.scss" />
+    <None Include="node_modules\sweetalert2\src\scss\_body.scss" />
+    <None Include="node_modules\sweetalert2\src\scss\_core.scss" />
+    <None Include="node_modules\sweetalert2\src\scss\_icons.scss" />
+    <None Include="node_modules\sweetalert2\src\scss\_mixins.scss" />
+    <None Include="node_modules\sweetalert2\src\scss\_theming.scss" />
+    <None Include="node_modules\sweetalert2\src\scss\_toasts-animations.scss" />
+    <None Include="node_modules\sweetalert2\src\scss\_toasts-body.scss" />
+    <None Include="node_modules\sweetalert2\src\scss\_toasts.scss" />
+    <None Include="node_modules\sweetalert2\src\staticMethods.js" />
+    <None Include="node_modules\sweetalert2\src\staticMethods\argsToParams.js" />
+    <None Include="node_modules\sweetalert2\src\staticMethods\bindClickHandler.js" />
+    <None Include="node_modules\sweetalert2\src\staticMethods\dom.js" />
+    <None Include="node_modules\sweetalert2\src\staticMethods\fire.js" />
+    <None Include="node_modules\sweetalert2\src\staticMethods\mixin.js" />
+    <None Include="node_modules\sweetalert2\src\staticMethods\showLoading.js" />
+    <None Include="node_modules\sweetalert2\src\staticMethods\timer.js" />
+    <None Include="node_modules\sweetalert2\src\SweetAlert.js" />
+    <None Include="node_modules\sweetalert2\src\sweetalert2.js" />
+    <None Include="node_modules\sweetalert2\src\sweetalert2.scss" />
+    <None Include="node_modules\sweetalert2\src\types.js" />
+    <None Include="node_modules\sweetalert2\src\utils\aria.js" />
+    <None Include="node_modules\sweetalert2\src\utils\classes.js" />
+    <None Include="node_modules\sweetalert2\src\utils\defaultInputValidators.js" />
+    <None Include="node_modules\sweetalert2\src\utils\DismissReason.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\animationEndEvent.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\domUtils.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\getters.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\index.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\init.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\inputUtils.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\parseHtmlToContainer.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\render.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderActions.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderCloseButton.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderContainer.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderContent.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderFooter.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderIcon.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderImage.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderInput.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderPopup.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderProgressSteps.js" />
+    <None Include="node_modules\sweetalert2\src\utils\dom\renderers\renderTitle.js" />
+    <None Include="node_modules\sweetalert2\src\utils\getTemplateParams.js" />
+    <None Include="node_modules\sweetalert2\src\utils\iosFix.js" />
+    <None Include="node_modules\sweetalert2\src\utils\isNodeEnv.js" />
+    <None Include="node_modules\sweetalert2\src\utils\openPopup.js" />
+    <None Include="node_modules\sweetalert2\src\utils\params.js" />
+    <None Include="node_modules\sweetalert2\src\utils\scrollbar.js" />
+    <None Include="node_modules\sweetalert2\src\utils\setParameters.js" />
+    <None Include="node_modules\sweetalert2\src\utils\Timer.js" />
+    <None Include="node_modules\sweetalert2\src\utils\utils.js" />
+    <None Include="node_modules\sweetalert2\src\variables.scss" />
+    <None Include="node_modules\tealight\CHANGELOG.md" />
+    <None Include="node_modules\tealight\dist\tealight.es.js" />
+    <None Include="node_modules\tealight\dist\tealight.js" />
+    <None Include="node_modules\tealight\dist\tealight.min.js" />
+    <None Include="node_modules\tealight\LICENSE" />
+    <None Include="node_modules\tealight\README.md" />
+    <None Include="wwwroot\Fonts\TiltNeon-Regular-VariableFont_XROT,YROT.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="node_modules\sweetalert2\sweetalert2.d.ts" />
+    <TypeScriptCompile Include="node_modules\tealight\src\index.d.ts" />
+  </ItemGroup>
+
+
+</Project>

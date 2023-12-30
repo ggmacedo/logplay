@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TCC.Domain\TCC.Domain.csproj" />
+    <ProjectReference Include="..\TCC.Infra.CrossCutting.Identity\TCC.Infra.CrossCutting.Identity.csproj" />
+    <ProjectReference Include="..\TCC.Infra.Data\TCC.Infra.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="DtronixPdf.ImageSharp" Version="1.1.3" />
+    <PackageReference Include="MailJet.NET" Version="1.6.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.21" />
+  </ItemGroup>
+
+</Project>

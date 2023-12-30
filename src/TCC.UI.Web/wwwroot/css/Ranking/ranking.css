@@ -1,0 +1,57 @@
+﻿body {
+    margin-bottom:200px;
+}
+
+.titulo {
+    text-align: center; /* Centraliza o texto horizontalmente */
+    padding: 20px;
+    color: var(--verde-destaque);
+    margin-top: 80px;
+    margin-bottom:30px;
+    
+}
+.tabela-container {
+    flex: 1; /* Preenche o espaço disponível entre o título e o footer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto; /* Adicione uma barra de rolagem quando necessário */
+    height: 100%;
+    width: 100%;
+}
+.tabela {
+    width: 50%;
+    border-collapse: collapse;
+    background-color: var(--roxo-claro2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1.5);
+    margin: 0 auto;
+    background-color: var(--roxo-claro2);
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+
+    .tabela th, .tabela td {
+        padding: 10px;
+        text-align: center;
+        
+    }
+
+    .tabela th {
+        background-color: var(--roxo-claro1);
+        color: #fff;
+       
+    }
+
+    .tabela tr:nth-child(odd) {
+        background-color: var(--roxo-escuro);
+    }
+
+#quinaDireita {
+    border-top-right-radius: 10px;
+}
+
+#quinaEsquerda {
+    border-top-left-radius: 10px;
+}

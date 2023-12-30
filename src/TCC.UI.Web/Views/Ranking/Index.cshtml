@@ -1,0 +1,39 @@
+@model IEnumerable<TCC.Application.ViewModels.UsuarioViewModel>
+
+@{
+    ViewData["Title"] = "LogPlay - Ranking";
+}
+
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+
+
+<div class="titulo">
+    <h1>Ranking de Alunos</h1>
+</div>
+<div class="tabela-container">
+<table class="tabela">
+    <thead>
+        <tr>
+            <th id="quinaEsquerda">@ViewBag.Header</th>
+            <th>Nome do Aluno</th>
+            <th id="quinaDireita">XP</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aluno in Model)
+        {
+            <tr>
+                <td>@(Model.ToList().IndexOf(aluno) + 1)</td>
+                <td>@Html.DisplayFor(a => aluno.Nome)</td>
+                <td>@Html.DisplayFor(a => aluno.Xp)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+
+@section Styles{
+    <link href="~/css/Ranking/ranking.css" rel="stylesheet" />
+}

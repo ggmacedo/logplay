@@ -1,0 +1,343 @@
+﻿@using TCC.Domain.Enums;
+@model TCC.Application.ViewModels.ProgressoAulaViewModel;
+
+@{
+    ViewData["Title"] = "LogPlay - Aulas";
+}
+
+<div class="aula-main-container">
+    <div class="banner-aula">
+        <h1 class="titulo-aula">@Html.DisplayFor(m => m.Aula.Nome)</h1>
+        <p class="descricao-aula">@Html.DisplayFor(m => m.Aula.Descricao)</p>
+        
+        <div class="voltar-section">
+            <div class="botao-voltar">
+                <a class="btn btn-primary" asp-controller="Cursos" asp-route-id="@Model.CursoId">
+                    Voltar para o Curso
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @if (ViewBag.Images != null)
+    {
+        <div class="pdf-container">
+            @foreach (var img in ViewBag.Images)
+            {
+                <img src="data:image/png;base64,@Convert.ToBase64String(img)" />
+            }
+        </div>
+    }
+
+
+    <div class="exercicios-container">
+        <h2>Exercícios</h2>        
+            @foreach (var exercicio in Model.Aula.Exercicios)
+            {
+                var isExercicioRespondido = Model?.RespostasExercicios != null && Model.RespostasExercicios.Exists(r => r.ExercicioId == exercicio.Id && !string.IsNullOrEmpty(r.Resposta));
+                var resposta = isExercicioRespondido ? Model?.RespostasExercicios?.FirstOrDefault(r => r.ExercicioId == exercicio.Id)?.Resposta : default;
+
+                <form method="post" id=@("formEx-"+exercicio.Id.ToString()) asp-controller="Aulas" asp-action="ResponderExercicio" class="exercicio-element">
+                    <h3 class="enunciado-exercicio">@exercicio.Enunciado</h3>
+                    <p>Acerte para ganhar @exercicio.QtdMoedas moedas.</p>
+                    @Html.Hidden("ExercicioId", exercicio.Id)
+                    @Html.Hidden("AulaId", Model?.AulaId)
+
+                    <label>
+                    @Html.RadioButton(
+                        "Resposta", 
+                        exercicio.AlternativaA,
+                        isExercicioRespondido && resposta == exercicio.AlternativaA,
+                        isExercicioRespondido ?
+                        new
+                        {
+                            id="AlternativaA-"+exercicio.Id.ToString(),
+                            disabled = "disabled",
+                        } :
+                        new
+                        {
+                            id="AlternativaA-"+exercicio.Id.ToString(),
+                        }
+                    )
+                        @exercicio.AlternativaA
+                    </label>
+
+                    <label>
+                    @Html.RadioButton(
+                        "Resposta", 
+                        exercicio.AlternativaB,
+                        isExercicioRespondido && resposta == exercicio.AlternativaB,
+                        isExercicioRespondido ?
+                        new
+                        {
+                            id="AlternativaB-"+exercicio.Id.ToString(),
+                            disabled = "disabled",
+                        } :
+                        new
+                        {
+                            id="AlternativaB-"+exercicio.Id.ToString(),
+                        }
+                    )
+                    @exercicio.AlternativaB
+                    </label>
+
+                    @if (!string.IsNullOrEmpty(exercicio.AlternativaC))
+                    {
+                        var isChecked = isExercicioRespondido && resposta == exercicio.AlternativaC;
+
+                        <label>
+                        @Html.RadioButton(
+                            "Resposta", 
+                            exercicio.AlternativaC,
+                            isChecked,
+                            isExercicioRespondido ?
+                            new
+                            {
+                                id="AlternativaC-"+exercicio.Id.ToString(),
+                                disabled = "disabled",
+                            } :
+                            new
+                            {
+                                id="AlternativaC-"+exercicio.Id.ToString(),
+                            }
+                        )
+                        @exercicio.AlternativaC
+                        </label>
+                    }
+                    
+                    @if (!string.IsNullOrEmpty(exercicio.AlternativaD))
+                    {
+                        var isChecked = isExercicioRespondido && resposta == exercicio.AlternativaD;
+                        <label>
+                            @Html.RadioButton(
+                                "Resposta", 
+                                exercicio.AlternativaD,
+                                isChecked,
+                                isExercicioRespondido ?
+                                new
+                                {
+                                    id="AlternativaD-"+exercicio.Id.ToString(),
+                                    disabled = "disabled",
+                                } :
+                                new
+                                {
+                                    id="AlternativaD-"+exercicio.Id.ToString(),
+                                }
+                            )
+                            @exercicio.AlternativaD
+                            </label>
+                    }
+
+                    <div class="botao-verificar">
+                        @if (isExercicioRespondido)
+                        {
+                        <button class="btn btn-primary botao-responder" type="submit" value="Submit" data-id="@exercicio.Id" @(isExercicioRespondido ? "disabled" : "")>
+                            Respondido
+                            </button>
+
+                        }
+                        else
+                        {
+                        <button class="btn btn-primary botao-responder" type="submit" value="Submit" data-id="@exercicio.Id" @(isExercicioRespondido ? "disabled" : "")>
+                                Responder
+                            </button>
+
+                        }
+                    </div>
+            </form>
+            }             
+    </div>
+
+    <div class="concluir-section">
+        <div class="botao-concluir">
+            @if (Model.Curso.Aulas.Count() == Model.Aula.Number)
+            {
+                <a class="btn btn-primary" onclick="concluirAula('@Model.AulaId.ToString()')">
+                    Concluir curso
+                </a>
+            }
+            else
+            {
+                <a class="btn btn-primary" onclick="concluirAula('@Model.AulaId.ToString()')">
+                    Concluir aula
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Aulas/detalhes.css" asp-append-version="true" />
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("form").submit(function (e) {
+                e.preventDefault();
+                var form = $(this);
+                var formData = form.serialize();
+                var submitButton = form.find("button[type=submit]");
+
+                if (!validateForm(form)) {
+                    showErrorAlertWithMessage(
+                        "Resposta errada!", 
+                        "Selecione uma das alternativas."
+                    );
+                    return;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Aulas/ResponderExercicio",
+                    data: formData,
+                    dataType: "json",
+                    success: function (response) {
+                        if (!response.success) {
+
+                            disableForm(form, submitButton);
+
+                            addClassToRadioButton(form, "resposta-selecionada-errada");
+                            var respostaCorreta = decodeHtmlEntities(`${response.respostaCerta}`); // Decodifica entidades HTML
+
+                            form.find("input[type=radio]:not(:checked)").each(function () {
+                                var button = $(this);
+                                var valorBotao = button.val();
+                                if (valorBotao === respostaCorreta) {
+                                    button.parent().addClass("resposta-selecionada-correta");
+                                }
+                            });
+
+                            showErrorAlertWithMessage(
+                                "Resposta errada!",
+                                `${response.errorMessage}`
+                            );
+                        }
+                        else {
+                            disableForm(form, submitButton);
+                            addClassToRadioButton(form, "resposta-selecionada-correta");
+
+                            Swal.fire({
+                                position: 'center',     
+                                icon: 'success',
+                                title: 'Parabéns! Você acertou!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                    },
+                    error: function () {
+
+                        showErrorAlertWithMessage(
+                            "Ocorreu um erro inesperado!",
+                            "Erro inesperado ao tentar responder o exercício."
+                        );
+                    }
+                });
+            });
+        });
+
+        function disableForm(form, submitButton) {
+            form.find("input[type=radio]").prop("disabled", true);
+            submitButton.prop("disabled", true);
+            submitButton.text("Respondido");
+        }
+
+        function addClassToRadioButton(form, className){
+            form.find("input[type=radio]:checked").parent().addClass(className);
+        }
+
+        function validateForm(form) {
+            var radioButtons = form.find("input[name='Resposta']");
+
+            return radioButtons.is(":checked");
+        }
+
+        function showErrorAlertWithMessage(title, message){
+            Swal.fire({
+                icon: 'error',
+                title: title,
+                text: message
+            })
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            @foreach (var exercicio in Model.Aula.Exercicios)
+            {
+                var isExercicioRespondido = Model?.RespostasExercicios != null && Model.RespostasExercicios.Exists(r => r.ExercicioId == exercicio.Id && !string.IsNullOrEmpty(r.Resposta));
+                var resposta = isExercicioRespondido ? Model?.RespostasExercicios?.FirstOrDefault(r => r.ExercicioId == exercicio.Id)?.Resposta : default;
+
+                if (!isExercicioRespondido)
+                {
+                    continue;
+                }
+
+                <text>
+                    setRadioButtonsColor('@exercicio.Id.ToString()', '@exercicio.Resposta', '@resposta'); 
+                </text>
+            }
+        });
+
+
+        function setRadioButtonsColor(exercicioId, respostaCorreta) {
+            var form = $("#formEx-" + exercicioId);
+            var radioButtons = form.find("input[name='Resposta']");
+
+            radioButtons.each(function () {
+                var button = $(this);
+                var valorBotao = button.val();
+
+                respostaCorreta = decodeHtmlEntities(respostaCorreta); // Decodifica entidades HTML
+
+                if (valorBotao.startsWith(respostaCorreta)) {
+                    // Resposta correta selecionada
+                    button.parent().addClass("resposta-selecionada-correta");
+                } else if (button.is(":checked")) {
+                    // Resposta incorreta selecionada
+                    button.parent().addClass("resposta-selecionada-errada");
+                }
+            });
+        }
+
+        function decodeHtmlEntities(encodedString) {
+            var textArea = document.createElement('textarea');
+            textArea.innerHTML = encodedString;
+            return textArea.value;
+        }
+    </script>
+
+    <script>
+        function concluirAula(aulaId) {
+            //const baseURL = "https://localhost:7072/"
+            const baseURL = "https://logplay.net/"
+
+            var url = baseURL + 'aulas/concluir-aula/' + aulaId;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success === true){
+
+                        if (data.isCursoConcluido) {
+                            window.location.href = baseURL + data.redirectUrl;
+                            return;
+                        }
+
+                        window.location.href = baseURL + 'Aulas/' + data.nextAulaId;
+                        return;
+                    }
+                    console.log(data); // Exemplo de como acessar os dados da resposta
+
+                    showErrorAlertWithMessage(
+                        "Não foi possível concluir a aula!",
+                        `${data.errorMessage}`
+                    );
+                })
+                .catch(error => {
+                    console.error('Ocorreu um erro:', error);
+                });
+        }
+    </script>
+}

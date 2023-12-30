@@ -1,0 +1,117 @@
+﻿
+body {
+    margin-bottom: 120px;
+    padding: 0;
+    color: #fff;
+    font-family: 'TiltNeon', sans-serif;
+    background-color: var(--roxo-escuro);
+}
+
+header {
+    background-color: var(--roxo-escuro);
+    text-align: center;
+    padding: 25px 0;
+}
+
+h1 {
+    font-size: 36px;
+    color: var(--verde-destaque);
+}
+
+.loja-main-container {
+    width: 100vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.cards-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--roxo-claro1);
+    border: 10px solid #201b2c;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+    border-radius: 30px;
+    border-color: var(--roxo-escuro);
+    overflow: hidden;
+}
+
+
+.card img {
+    max-width: 20% !important;
+    height: auto;
+    margin-bottom: 10px;
+    height: auto;
+    max-width: 20%;
+    vertical-align: middle;
+}
+
+
+.btnComprar {
+    background-color: var(--roxo-escuro);
+    color: #fff;
+    border-radius: 5px;
+    border-color: var(--roxo-escuro);
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'TiltNeon', sans-serif;
+    width: 30%;
+    min-width: 50%;
+}
+
+.btnComprar:hover {
+    background-color: #00ff88;
+}
+
+
+.moedas {
+    font-weight: bold;
+    font-size: 18px;
+    color: #fff;
+    margin-right: 20px; 
+}
+
+#moedas-usuario {
+    color: #00ff88; 
+    background-color: #2f2841; 
+    padding: 4px 8px; 
+    border-radius: 4px; 
+}
+
+@font-face {
+    font-family: 'TiltNeon';
+    src: url("../../Fonts/TiltNeon-Regular-VariableFont_XROT,YROT.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media (min-width: 40rem) {
+    .card {
+        width: 50%;
+    }
+}
+
+@media (min-width: 56rem) {
+    .card {
+        width: 33.3333%;
+    }
+}

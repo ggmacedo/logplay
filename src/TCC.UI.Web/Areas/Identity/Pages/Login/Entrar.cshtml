@@ -1,0 +1,50 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Entrar";
+}
+
+@{
+    Layout = "";
+}
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/css/Login/login.css" asp-append-version="true" />
+    <title>@ViewData["Title"]</title>
+
+</head>
+
+<body>
+    <div class="main-login">
+        <div class="left-login">
+            <h1>Faça login<br>E entre para o jogo!</h1>
+            <img src="~/assets/img/Login/loginImg.svg" class="left-login-img">
+        </div>
+
+        <div class="right-login">
+            <form id="UserLoginModal" class="card-login" method="post">
+                <h1>LOGIN</h1>
+                <div class="text-field">
+                    <label>Email</label>
+                    <input asp-for="Input.Email" autocomplete="off" aria-required="true" autofocus />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="text-field">
+                    <label>Senha</label>
+                    <input asp-for="Input.Password" autocomplete="off" aria-required="true" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <button id="login-submit" type="submit" name="login-button" class="botao-login">Entrar</button>
+                <div class="register-link">
+                    <a asp-page="./ForgotPassword">Esqueceu sua senha?</a>
+                    <a asp-page="./Registrar" asp-route-returnUrl="@Model.ReturnUrl">Criar uma nova conta</a>
+                    <a asp-page="./Home/Index">Voltar para a home</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>

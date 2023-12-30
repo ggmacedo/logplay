@@ -1,0 +1,102 @@
+﻿@page
+@model EmailModel
+@{
+    ViewData["Title"] = "Gerenciar Email";
+    ViewData["ActivePage"] = ManageNavPages.Email;
+}
+<style>
+    h3 {
+        color: var(--verde-destaque);
+        margin-left: 10px;
+    }
+
+    .form-control, .input-group {
+        background-color: var(--roxo-claro2) !important;
+        color: white !important;
+        border: none;
+        margin: 10px;
+    }
+
+    .form-floating, .input-group > input {
+        outline: none !important;
+        border-radius: 5px;
+    }
+
+    .form-label {
+        color: #f0ffffde;
+    }
+
+    .form-floating > span {
+        margin: 10px;
+    }
+
+    .btn-primary {
+        background-color: transparent !important;
+        transition: background-color 0.5s ease;
+        border: 2px solid #00ff88;
+        color: #00ff88;
+        margin: 10px;
+    }
+
+    .btn-primary:hover {
+        background-color: darkgreen !important;
+        border: 2px solid white;
+    }
+</style>
+<style media="screen and (max-width: 400px)">
+    .form-floating {
+        width: 26em;
+    }
+
+    .btn-primary {
+        margin: 3em;
+    }  
+</style>
+
+<h3>@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="email-form" method="post">
+            @if (Model.IsEmailConfirmed)
+            {
+                <div class="form-floating">
+                    <input asp-for="Email" class="form-control shadow-lg" disabled />
+                    <label class="form-label">Email</label>
+                </div>
+            }
+            else
+            {
+                <div class="form-floating">
+                    <input asp-for="Email" class="form-control" disabled />
+                    <label asp-for="Email" class="form-label"></label>
+                    <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+                </div>
+            }
+            <div class="form-floating">
+                <input asp-for="Input.NewEmail" autocomplete="off" class="form-control" aria-required="true" onfocus="this.setAttribute('autocomplete', 'off');" />
+                <label asp-for="Input.NewEmail" class="form-label"></label>
+                <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
+            </div>
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="form-floating">
+                    <span class="text-danger">@TempData["ErrorMessage"]</span>
+                </div>
+            }
+
+            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="w-75 btn btn-lg btn-primary">Alterar Email</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            $('#Input_NewEmail').attr('autocomplete', 'off');
+        });
+    </script>
+}

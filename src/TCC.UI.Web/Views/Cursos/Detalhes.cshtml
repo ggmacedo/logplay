@@ -1,0 +1,100 @@
+﻿@using TCC.Domain.Enums;
+@model TCC.Application.ViewModels.CursoViewModel
+@inject TCC.Application.Interfaces.IProgressoAppService ProgressoAppService;
+@inject TCC.Application.Interfaces.IUsuarioAppService UsuarioAppService;
+
+@{
+    ViewData["Title"] = "LogPlay - Cursos";
+}
+
+    <div class="curso-main-container">
+        <div class="banner-curso">
+            <h1 class="titulo-curso">@Html.DisplayFor(m => m.Nome)</h1>
+            <p class="descricao-curso">@Html.DisplayFor(m => m.Descricao)</p>
+            <div class="botao-iniciar">
+
+                @if(await ProgressoAppService.IsCursoIniciado(Model.Id, UsuarioAppService.GetCurrentUser().Result.Id))
+                {
+                    <a asp-controller="Cursos" asp-action="IniciarCurso" asp-route-id="@Model.Id">
+                        <button class="btn btn-primary">
+                            Continuar
+                        </button>
+                    </a>
+                }
+                else if (await ProgressoAppService.IsCursoConcluido(Model.Id, UsuarioAppService.GetCurrentUser().Result.Id))
+                {
+                    <button class="btn btn-primary" disabled>
+                        Curso concluído
+                    </button>
+                }
+                else
+                {
+                    <a asp-controller="Cursos" asp-action="IniciarCurso" asp-route-id="@Model.Id">
+                        <button class="btn btn-primary">
+                            Iniciar curso
+                        </button>
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="curso-container">
+            <div class="curso-aulas">
+                <div class="titulo-curso2">
+                    <h2>@Html.DisplayFor(m => m.Nome)</h2>
+                </div>
+                <div class="lista-aulas">
+                    <ul>
+                        @foreach (var aula in Model.Aulas.OrderBy(a => a.Number))
+                        {
+                            <li>@Html.DisplayFor(a => aula.Nome)</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="curso-sidebar">
+
+                <div class="sidebar-title">
+                <h3>Informações Gerais</h3>
+                </div>
+                <div class="info-item">
+                    <span>Duração:</span> 
+                    <span class="model-data">@Html.DisplayFor(m => m.Duracao) horas</span>
+                </div>
+                <div class="info-item">
+                    <span>Aulas:</span>
+                    <span class="model-data">@Model.Aulas.Count</span>
+                </div>
+                <div class="info-item">
+                    <span>Exercícios:</span>   
+                    <span class="model-data">@Model.Aulas.SelectMany(a => a.Exercicios).Count()</span>
+                </div>
+                <div class="info-item">
+                    <span>Nível:</span>
+                    <span class="model-data">@Html.DisplayFor(m => m.NivelCurso)</span>
+                </div>
+                <div class="info-item">
+                    <span>Moedas:</span>
+                    <span class="model-data">@Html.DisplayFor(m => m.QtdMoeda)</span>
+                </div>
+                <div class="info-item">
+                    <span>XP:</span>
+                    <span class="model-data">@Html.DisplayFor(m => m.Xp)</span>
+                </div>
+            </div>
+        </div>
+        <div class="matricular-section">
+            <div class="botao-iniciar">
+            <a asp-controller="Cursos" asp-action="Index">
+                <button class="btn btn-primary" >
+                    Todos os cursos
+                </button>
+            </a>
+            
+            </div>
+        </div>
+    </div>
+
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/Cursos/detalhes.css" asp-append-version="true" />
+}

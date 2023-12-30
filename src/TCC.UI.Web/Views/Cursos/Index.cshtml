@@ -1,0 +1,84 @@
+﻿@model IEnumerable<TCC.Application.ViewModels.CursoViewModel>
+
+@{
+    ViewData["Title"] = "LogPlay - Cursos";
+}
+<head>
+    <title>@ViewData["Title"]</title>
+</head>
+<body>
+    <div class="body-curso">
+        <div class="container">
+            <div class="titulo">
+                <h1>Cursos</h1>
+                <p>Desvende a Lógica da Programação com Nossos Cursos</p>
+            </div>
+
+            <div class="cards-container">
+                @foreach (var curso in Model)
+                {
+                    <a class="card" asp-controller="Cursos" asp-action="Detalhes" asp-route-id="@curso.Id">
+                        <div class="banner">
+                            <img class="icone" src="~/assets/img/Icons/Cursos/@curso.IconUrl" alt="Tipos de Dados">
+                            <div class="titulo-card">
+                                <h2>@Html.DisplayFor(t => curso.Nome)</h2>
+                            </div>
+                        </div>
+                        <p>@Html.DisplayFor(t => curso.Descricao)</p>
+                        <p class="nivel">Nível: @Html.DisplayFor(t => curso.NivelCurso)</p>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+
+@section Styles{
+    <link href="~/css/Cursos/cursos.css" rel="stylesheet" type="text/css" />
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        @* <div class="container mt-5 mb-5">
+        <div class="row mt-1">
+        @foreach (var curso in Model)
+        {
+        <div class="col-md-4">
+        <a  asp-controller="Cursos" asp-action="Detalhes" asp-route-name="@curso.Nome">
+        <div class="p-card bg-dark p-2 rounded px-3">
+        <div class="d-flex align-items-center credits"><img src="https://i.imgur.com/hlz6G90.png" width="16px"><span class="text-white ml-2">2 credits</span></div>
+        <h5 class="mt-2 text-white">@Html.DisplayFor(t => curso.Nome)</h5><span class="badge badge-primary py-1 mb-2">integrations</span>
+        <span class="d-block mb-5 text-white">@Html.DisplayFor(t => curso.Descricao)</span>
+        <span class="d-block mb-5 text-white">Duração: @Html.DisplayFor(t => curso.Duracao) minutos</span>
+        </div>
+        </a>
+        </div>
+        }
+        </div>
+        </div>
+
+
+
+
+        @section Styles {
+        <link href="~/css/Cursos/cursos.css" rel="stylesheet" type="text/css" />
+        } *@
+
+
